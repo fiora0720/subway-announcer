@@ -3,14 +3,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>지하철 안내 방송</title>
+<title>전철 내부 안내 시스템</title>
 
 <style>
 
 body{
 background:#111;
 color:white;
-font-family:monospace;
+font-family:Arial;
 text-align:center;
 padding:40px;
 }
@@ -21,29 +21,30 @@ padding:6px;
 margin:6px;
 }
 
-.board{
+.lcd{
 
 background:black;
-border:6px solid #222;
 width:600px;
 margin:40px auto;
 padding:30px;
 
+border:6px solid #222;
+
 font-size:28px;
-line-height:1.8;
+line-height:2;
 
 }
 
-.green{
-color:#00ff66;
-}
-
-.yellow{
+.dest{
 color:#ffd400;
 }
 
-.red{
-color:#ff3333;
+.station{
+color:#00ff66;
+}
+
+.door{
+color:white;
 }
 
 </style>
@@ -51,7 +52,17 @@ color:#ff3333;
 
 <body>
 
-<h2>🚇 지하철 안내 방송</h2>
+<h2>🚇 전철 내부 안내</h2>
+
+행선지
+
+<select id="dest">
+<option>청량리</option>
+<option>서울역</option>
+<option>왕십리</option>
+</select>
+
+<br>
 
 이번 역
 
@@ -60,6 +71,8 @@ color:#ff3333;
 <option>청량리</option>
 <option>서울역</option>
 </select>
+
+<br>
 
 내리실 문
 
@@ -70,18 +83,20 @@ color:#ff3333;
 
 <br>
 
-<button onclick="play()">방송 재생</button>
+<button onclick="play()">안내방송</button>
 
-<div class="board" id="board">
+<div class="lcd">
 
-<div class="green">
-이번역 : 왕십리
+<div class="dest" id="destText">
+행선지 : 청량리
 </div>
 
-<div>
-<span class="green">열차가</span>
-<span class="red">잠시후</span>
-<span class="green">도착합니다</span>
+<div class="station" id="stationText">
+이번 역 : 왕십리
+</div>
+
+<div class="door" id="doorText">
+내리실 문 : 오른쪽
 </div>
 
 </div>
@@ -92,18 +107,15 @@ function play(){
 
 let station=document.getElementById("station").value
 let door=document.getElementById("door").value
+let dest=document.getElementById("dest").value
+
+document.getElementById("destText").innerText="행선지 : "+dest
+document.getElementById("stationText").innerText="이번 역 : "+station
+document.getElementById("doorText").innerText="내리실 문 : "+door
 
 let text=
-"이번 역은 "+station+"역입니다. "+
+"이번 역은 "+station+", "+station+"역입니다. "+
 "내리실 문은 "+door+"입니다."
-
-let boardHTML=
-"<div class='yellow'>이번역 : "+station+"</div>"+
-"<div><span class='green'>열차가 </span>"+
-"<span class='red'>잠시후 </span>"+
-"<span class='green'>도착합니다</span></div>"
-
-document.getElementById("board").innerHTML=boardHTML
 
 let speech=new SpeechSynthesisUtterance(text)
 
