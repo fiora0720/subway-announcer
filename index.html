@@ -3,131 +3,53 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>전철 내부 안내 시스템</title>
+
+<title>철도 전광판</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
 <style>
 
 body{
 background:#111;
-color:white;
-font-family:Arial;
-text-align:center;
-padding:40px;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+font-family:'Press Start 2P', monospace;
 }
 
-select,button{
-font-size:18px;
-padding:6px;
-margin:6px;
-}
-
-.lcd{
+.board{
 
 background:black;
-width:600px;
-margin:40px auto;
-padding:30px;
-
+padding:25px 40px;
 border:6px solid #222;
-
-font-size:28px;
-line-height:2;
+width:700px;
 
 }
 
-.dest{
+.line1{
+color:#00ff00;
+font-size:26px;
+margin-bottom:20px;
+}
+
+.line2{
+font-size:26px;
+}
+
+.yellow{
 color:#ffd400;
 }
 
-.station{
-color:#00ff66;
+.red{
+color:#ff3030;
 }
 
-.door{
-color:white;
+.green{
+color:#00ff00;
 }
 
 </style>
-</head>
-
-<body>
-
-<h2>🚇 전철 내부 안내</h2>
-
-행선지
-
-<select id="dest">
-<option>청량리</option>
-<option>서울역</option>
-<option>왕십리</option>
-</select>
-
-<br>
-
-이번 역
-
-<select id="station">
-<option>왕십리</option>
-<option>청량리</option>
-<option>서울역</option>
-</select>
-
-<br>
-
-내리실 문
-
-<select id="door">
-<option value="왼쪽">왼쪽</option>
-<option value="오른쪽">오른쪽</option>
-</select>
-
-<br>
-
-<button onclick="play()">안내방송</button>
-
-<div class="lcd">
-
-<div class="dest" id="destText">
-행선지 : 청량리
-</div>
-
-<div class="station" id="stationText">
-이번 역 : 왕십리
-</div>
-
-<div class="door" id="doorText">
-내리실 문 : 오른쪽
-</div>
-
-</div>
-
-<script>
-
-function play(){
-
-let station=document.getElementById("station").value
-let door=document.getElementById("door").value
-let dest=document.getElementById("dest").value
-
-document.getElementById("destText").innerText="행선지 : "+dest
-document.getElementById("stationText").innerText="이번 역 : "+station
-document.getElementById("doorText").innerText="내리실 문 : "+door
-
-let text=
-"이번 역은 "+station+", "+station+"역입니다. "+
-"내리실 문은 "+door+"입니다."
-
-let speech=new SpeechSynthesisUtterance(text)
-
-speech.lang="ko-KR"
-speech.rate=0.9
-
-speechSynthesis.speak(speech)
-
-}
-
-</script>
-
-</body>
-</html>
+</
 ```
