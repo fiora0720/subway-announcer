@@ -1,29 +1,106 @@
+```html
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <title>지하철 안내 방송</title>
-<link rel="stylesheet" href="style.css">
+
+<style>
+body{
+background:#111;
+color:white;
+font-family:Arial;
+text-align:center;
+padding:40px;
+}
+
+select,button{
+font-size:18px;
+padding:6px;
+margin:5px;
+}
+
+.lcd{
+margin:30px auto;
+width:420px;
+padding:30px;
+background:black;
+color:lime;
+font-size:22px;
+border:4px solid #333;
+line-height:1.6;
+}
+</style>
+
 </head>
 
 <body>
 
 <h1>🚇 지하철 안내 방송</h1>
 
-<select id="station">
-<option value="왕십리">왕십리</option>
-<option value="청량리">청량리</option>
-<option value="서울">서울</option>
+<div>
+
+행선지  
+<select id="dest">
+<option>서울역</option>
+<option>왕십리</option>
+<option>청량리</option>
+<option>도심</option>
 </select>
+
+<br>
+
+이번 역  
+<select id="station">
+<option>서울역</option>
+<option>왕십리</option>
+<option>청량리</option>
+<option>도심</option>
+</select>
+
+<br>
+
+내리실 문  
+<select id="door">
+<option value="왼쪽">왼쪽</option>
+<option value="오른쪽">오른쪽</option>
+</select>
+
+<br><br>
 
 <button onclick="play()">방송 재생</button>
 
-<div class="lcd" id="lcd">
-다음 역 표시
 </div>
 
-<script src="script.js"></script>
+<div class="lcd" id="lcd">
+안내 방송 대기중
+</div>
+
+<script>
+
+function play(){
+
+let station=document.getElementById("station").value
+let door=document.getElementById("door").value
+let dest=document.getElementById("dest").value
+
+let text=
+"이번 역은 "+station+"역입니다. "+
+station+"역입니다. "+
+"내리실 문은 "+door+"쪽입니다. "+
+"행선지는 "+dest+"입니다."
+
+document.getElementById("lcd").innerText=text
+
+let speech=new SpeechSynthesisUtterance(text)
+speech.lang="ko-KR"
+
+speechSynthesis.speak(speech)
+
+}
+
+</script>
 
 </body>
-
 </html>
-
+```
