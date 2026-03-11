@@ -8,9 +8,9 @@
 <style>
 
 body{
-background:#0b0b0b;
+background:#111;
 color:white;
-font-family:Arial;
+font-family:monospace;
 text-align:center;
 padding:40px;
 }
@@ -21,15 +21,29 @@ padding:6px;
 margin:6px;
 }
 
-.lcd{
-margin:30px auto;
-width:500px;
-padding:30px;
+.board{
+
 background:black;
+border:6px solid #222;
+width:600px;
+margin:40px auto;
+padding:30px;
+
+font-size:28px;
+line-height:1.8;
+
+}
+
+.green{
 color:#00ff66;
-font-size:22px;
-border:5px solid #222;
-line-height:1.7;
+}
+
+.yellow{
+color:#ffd400;
+}
+
+.red{
+color:#ff3333;
 }
 
 </style>
@@ -37,41 +51,38 @@ line-height:1.7;
 
 <body>
 
-<h1>🚇 지하철 안내 방송 시스템</h1>
-
-행선지
-<select id="dest">
-<option>청량리</option>
-<option>서울역</option>
-<option>왕십리</option>
-<option>도심</option>
-</select>
-
-<br>
+<h2>🚇 지하철 안내 방송</h2>
 
 이번 역
+
 <select id="station">
 <option>왕십리</option>
 <option>청량리</option>
 <option>서울역</option>
-<option>도심</option>
 </select>
 
-<br>
-
 내리실 문
+
 <select id="door">
 <option value="왼쪽">왼쪽</option>
 <option value="오른쪽">오른쪽</option>
 </select>
 
-<br><br>
+<br>
 
-<button onclick="play()">안내방송 재생</button>
+<button onclick="play()">방송 재생</button>
 
-<div class="lcd" id="lcd">
+<div class="board" id="board">
 
-안내방송 대기중
+<div class="green">
+이번역 : 왕십리
+</div>
+
+<div>
+<span class="green">열차가</span>
+<span class="red">잠시후</span>
+<span class="green">도착합니다</span>
+</div>
 
 </div>
 
@@ -81,15 +92,18 @@ function play(){
 
 let station=document.getElementById("station").value
 let door=document.getElementById("door").value
-let dest=document.getElementById("dest").value
 
 let text=
-"이번 역은 "+station+", "+station+"역입니다. "+
-"내리실 문은 "+door+"입니다. "+
-"내리실 때에는 발밑을 조심하시기 바랍니다. "+
-"이 열차는 "+dest+"행 열차입니다."
+"이번 역은 "+station+"역입니다. "+
+"내리실 문은 "+door+"입니다."
 
-document.getElementById("lcd").innerText=text
+let boardHTML=
+"<div class='yellow'>이번역 : "+station+"</div>"+
+"<div><span class='green'>열차가 </span>"+
+"<span class='red'>잠시후 </span>"+
+"<span class='green'>도착합니다</span></div>"
+
+document.getElementById("board").innerHTML=boardHTML
 
 let speech=new SpeechSynthesisUtterance(text)
 
